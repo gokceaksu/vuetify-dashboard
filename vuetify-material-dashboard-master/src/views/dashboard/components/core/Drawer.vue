@@ -31,7 +31,7 @@
           contain
         >
           <v-img
-            src="https://demos.creative-tim.com/vuetify-material-dashboard/favicon.ico"
+            src="https://www.somposigorta.com.tr/assets/svg/sompo-sigorta-footer.svg"
             max-height="30"
           />
         </v-list-item-avatar>
@@ -117,6 +117,12 @@
           to: '/pages/user',
         },
         {
+          icon: 'mdi-calendar',
+          title: 'Takvim',
+          to: '/pages/calendar',
+        },
+        /*
+        {
           title: 'rtables',
           icon: 'mdi-clipboard-outline',
           to: '/tables/regular-tables',
@@ -140,7 +146,7 @@
           title: 'notifications',
           icon: 'mdi-bell',
           to: '/components/notifications',
-        },
+        }, */
       ],
     }),
 

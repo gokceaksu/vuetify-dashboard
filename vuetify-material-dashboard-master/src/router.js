@@ -7,6 +7,7 @@ export default new Router({
   mode: 'hash',
   base: process.env.BASE_URL,
   routes: [
+
     {
       path: '/',
       component: () => import('@/views/dashboard/Index'),
@@ -19,9 +20,15 @@ export default new Router({
         },
         // Pages
         {
-          name: 'User Profile',
+          name: 'Kullanıcılar',
           path: 'pages/user',
-          component: () => import('@/views/dashboard/pages/UserProfile'),
+          // component: () => import('@/views/dashboard/pages/UserProfile'),
+          component: () => import('@/views/dashboard/pages/User'),
+        },
+        {
+          name: 'Takvim',
+          path: 'pages/calendar',
+          component: () => import('@/views/dashboard/pages/Calendar'),
         },
         {
           name: 'Notifications',

@@ -24,5 +24,8 @@
     data: () => ({
       expandOnHover: false,
     }),
+    async mounted () {
+      this.$store.dispatch('getIcapUsers')
+    },
   }
 </script>
