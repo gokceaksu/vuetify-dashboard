@@ -10,7 +10,7 @@ export default new Router({
 
     {
       path: '/',
-      component: () => import('@/views/dashboard/Index'),
+      component: () => import('@/views/dashboard/Login'),
       children: [
         // Dashboard
         {
