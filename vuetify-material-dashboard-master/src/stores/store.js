@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import ui from '@/stores/modules/ui'
-import auth from '@/stores/modules/auth'
-import appRefData from '@/stores/modules/appRefData'
+import ui from '@/stores/modules/ui.store'
+import auth from '@/stores/modules/auth.store'
+import appRefData from '@/stores/modules/appRefData.store'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
 
   modules: {
     ui,
@@ -15,3 +15,5 @@ export default new Vuex.Store({
     appRefData,
   },
 })
+
+export default store

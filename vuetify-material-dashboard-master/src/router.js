@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+// import { TokenService } from './services/token.service'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode: 'hash',
   base: process.env.BASE_URL,
   routes: [
@@ -71,3 +72,22 @@ export default new Router({
     },
   ],
 })
+/*
+router.beforeEach((to, from, next) => {
+  var loggedIn = !!TokenService.getToken()
+
+  if (!loggedIn) {
+    return next({
+      path: '/login',
+      query: { redirect: to.fullPath },
+      // Store the full path to redirect the user to after login
+    })
+  }
+  // Do not allow user to visit login page if they are logged in
+  if (loggedIn) {
+    return next('/')
+  }
+  next()
+})
+*/
+export default router

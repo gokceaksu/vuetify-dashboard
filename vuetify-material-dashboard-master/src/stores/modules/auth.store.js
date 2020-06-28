@@ -1,14 +1,21 @@
-import API from '@/lib/API'
+import UserService from '@/services/user.service'
+import { TokenService } from '@/services/storage.service'
 
 export default {
 
     state: {
-      token: localStorage.getItem('access_token') || null,
+      accessToken: TokenService.getToken(),
       loggedIn: false,
       userid: '',
       password: '',
     },
     getters: {
+      loggedIn (state) {
+        return state.loggedIn
+      },
+      token (state) {
+        return state.accessToken
+      },
     },
     mutations: {
       setAuth (state, token) {
@@ -18,7 +25,7 @@ export default {
     },
     actions: {
       async login (context, credentials) {
-        const res = await API.login(credentials)
+        const res = await UserService.login(credentials)
         return new Promise((resolve, reject) => {
           var success = false
           if (res.data) {

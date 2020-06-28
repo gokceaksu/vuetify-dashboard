@@ -1,4 +1,4 @@
-import API from '@/lib/API'
+import AppRefDataService from '@/services/appRefData.service'
 
 export default {
 
@@ -17,7 +17,7 @@ export default {
     },
     actions: {
       async getIcapUsers (context) {
-        const users = await API.getIcapUsers()
+        const users = await AppRefDataService.getIcapUsers()
         context.commit('setIcapUsers', users)
       },
     },

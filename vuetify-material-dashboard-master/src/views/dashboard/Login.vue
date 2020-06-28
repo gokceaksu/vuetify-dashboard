@@ -70,7 +70,7 @@
       },
       login () {
         if (this.validate) {
-          console.log('logining...')
+          console.log('login started...')
           this.$store.dispatch('login', {
             userid: this.userid,
             password: this.password,
