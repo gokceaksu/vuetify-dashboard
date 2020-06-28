@@ -1,15 +1,17 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import UIStore from '@/stores/modules/uiStore'
-import User from '@/stores/modules/user'
+import ui from '@/stores/modules/ui'
+import auth from '@/stores/modules/auth'
+import appRefData from '@/stores/modules/appRefData'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
 
   modules: {
-    ui: UIStore,
-    user: User,
+    ui,
+    auth,
+    appRefData,
   },
 })
