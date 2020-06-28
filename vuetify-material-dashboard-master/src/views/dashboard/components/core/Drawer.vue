@@ -109,17 +109,17 @@
         {
           icon: 'mdi-view-dashboard',
           title: 'dashboard',
-          to: '/',
+          to: '/index',
         },
         {
           icon: 'mdi-account',
           title: 'user',
-          to: '/pages/user',
+          to: '/index/pages/user',
         },
         {
           icon: 'mdi-calendar',
           title: 'Takvim',
-          to: '/pages/calendar',
+          to: '/index/pages/calendar',
         },
         /*
         {

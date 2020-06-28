@@ -11,7 +11,7 @@
           lazy-validation
         >
           <v-text-field
-            v-model="username"
+            v-model="userid"
             :counter="10"
             :rules="nameRules"
             label="Kullanıcı Adı"
@@ -27,14 +27,6 @@
             append-icon="mdi-eye-off"
             required
           />
-          <v-btn
-            :disabled="!valid"
-            color="success"
-            class="mr-4"
-            @click="validate"
-          >
-            Valid
-          </v-btn>
           <v-btn
             :disabled="!valid"
             color="blue"
@@ -60,11 +52,11 @@
   export default {
     data: () => ({
       valid: true,
-      username: '',
+      userid: '',
       password: '',
       nameRules: [
-        v => !!v || 'Name is required',
-        v => (v && v.length <= 10) || 'Name must be less than 10 characters',
+        v => !!v || 'Username is required',
+        v => (v && v.length <= 10) || 'Username must be less than 10 characters',
       ],
       select: null,
     }),
@@ -77,11 +69,15 @@
         this.$refs.form.reset()
       },
       login () {
-        console.log('logining')
-        this.$store.dispatch('login', {
-          username: this.username,
-          password: this.password,
-        })
+        if (this.validate) {
+          console.log('logining...')
+          this.$store.dispatch('login', {
+            userid: this.userid,
+            password: this.password,
+          }).then(response => {
+            this.$router.push('/index')
+          })
+        }
       },
     },
   }

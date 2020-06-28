@@ -1,42 +1,26 @@
 const API_URL = 'http://localhost:8080/sigorta/dispatch'
 
 const axios = require('axios')
-const qs = require('querystring')
-
-const config = {
-  headers: {
-    'Content-Type': 'application/x-www-form-urlencoded',
-  },
-}
 
 export default {
   async getIcapUsers () {
-    const res = await fetch(API_URL, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: 'cmd=getIcapUsers',
-    })
-    console.log('gokce', res.json)
-    return res.json()
+    const params = new URLSearchParams()
+    params.append('cmd', 'getIcapUsers')
+    const res = await axios.post(API_URL, params)
+
+    return res.data
   },
 
-  login (credentials) {
+  async login (credentials) {
     const requestBody = {
-      cmd: 'login',
-      jp: {
-        username: credentials.username.stringify,
-        password: credentials.password.stringify,
-        language: 'tr',
-      },
+      userid: credentials.userid,
+      password: credentials.password,
+      language: 'tr',
     }
-    axios.post(API_URL, qs.stringify(requestBody), config)
-    .then((result) => {
-      console.log('success')
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+    const params = new URLSearchParams()
+    params.append('cmd', 'login')
+    params.append('jp', JSON.stringify(requestBody))
+    const res = await axios.post(API_URL, params)
+    return res.data
   },
 }

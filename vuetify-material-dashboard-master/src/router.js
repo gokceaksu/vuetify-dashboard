@@ -9,8 +9,8 @@ export default new Router({
   routes: [
 
     {
-      path: '/',
-      component: () => import('@/views/dashboard/Login'),
+      path: '/index',
+      component: () => import('@/views/dashboard/Index'),
       children: [
         // Dashboard
         {
@@ -64,6 +64,10 @@ export default new Router({
           component: () => import('@/views/dashboard/Upgrade'),
         },
       ],
+    },
+    {
+      path: '/',
+      component: () => import('@/views/dashboard/Login'),
     },
   ],
 })

@@ -4,20 +4,35 @@ export default {
 
     state: {
       token: localStorage.getItem('access_token') || null,
-      username: '',
+      loggedIn: false,
+      userid: '',
       password: '',
     },
     getters: {
     },
     mutations: {
       setAuth (state, token) {
-        // state.icapUsers = users.data
+        // state.token = token
+        state.loggedIn = true
       },
     },
     actions: {
-      login (context, credentials) {
-        API.login(credentials)
-        // context.commit('setAuth', users)
+      async login (context, credentials) {
+        const res = await API.login(credentials)
+        return new Promise((resolve, reject) => {
+          var success = false
+          if (res.data) {
+            success = Object.prototype.hasOwnProperty.call(res.data, 'success')
+          }
+          if (success) {
+            context.commit('setAuth', true)
+            console.log('Logged in')
+            resolve(res)
+          } else {
+            console.log('Cannot login')
+            reject(res)
+          }
+        })
       },
     },
 }
