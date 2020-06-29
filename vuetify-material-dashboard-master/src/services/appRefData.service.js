@@ -6,9 +6,9 @@ export default {
     return res.data
   },
 
-  async getIcapRefDataByRefName () {
+  async getIcapRefDataByRefName (refName) {
     const requestBody = {
-      refName: 'ACENTE_TIPI',
+      refName: refName,
     }
     const res = await ApiService.post('GET_CACHABLE_RF_DATA_INFO_BY_REF_NAME', requestBody)
     return res.data

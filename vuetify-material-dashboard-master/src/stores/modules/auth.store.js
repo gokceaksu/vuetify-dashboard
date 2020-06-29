@@ -1,13 +1,13 @@
 import UserService from '@/services/user.service'
 import { TokenService } from '@/services/storage.service'
+import { SessionService } from '../../services/storage.service'
 
 export default {
 
     state: {
       accessToken: TokenService.getToken(),
       loggedIn: false,
-      userid: '',
-      password: '',
+      authenticationError: '',
     },
     getters: {
       loggedIn (state) {
@@ -16,30 +16,37 @@ export default {
       token (state) {
         return state.accessToken
       },
+      authenticationError (state) {
+        return state.authenticationError
+      },
     },
     mutations: {
-      setAuth (state, token) {
-        // state.token = token
-        state.loggedIn = true
+      setAuth (state, loggedIn) {
+        state.loggedIn = loggedIn
+      },
+      setErrorMessage (state, errorMessage) {
+        state.authenticationError = errorMessage
       },
     },
     actions: {
       async login (context, credentials) {
         const res = await UserService.login(credentials)
         return new Promise((resolve, reject) => {
-          var success = false
-          if (res.data) {
-            success = Object.prototype.hasOwnProperty.call(res.data, 'success')
-          }
-          if (success) {
-            context.commit('setAuth', true)
-            console.log('Logged in')
-            resolve(res)
-          } else {
-            console.log('Cannot login')
+          var loginFailed = Object.prototype.hasOwnProperty.call(res, 'error')
+
+          if (loginFailed) {
+            context.commit('setErrorMessage', res.messages[0].text)
             reject(res)
+          } else {
+            context.commit('setAuth', true)
+            TokenService.saveToken(res.data.authorizationData.session.token)
+            SessionService.saveSession(res.data.authorizationData.session)
+            resolve(res)
           }
         })
+      },
+      clearErrorMessage (context) {
+        context.commit('setErrorMessage', '')
       },
     },
 }

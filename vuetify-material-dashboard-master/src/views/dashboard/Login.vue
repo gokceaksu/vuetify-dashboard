@@ -45,10 +45,20 @@
         </v-form>
       </v-card-text>
     </v-card>
+    <v-alert
+      v-if="authenticationError.length > 0"
+      type="error"
+      dense
+      outlined
+    >
+      {{ authenticationError }}
+    </v-alert>
   </v-app>
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
+
   export default {
     data: () => ({
       valid: true,
@@ -58,8 +68,8 @@
         v => !!v || 'Username is required',
         v => (v && v.length <= 10) || 'Username must be less than 10 characters',
       ],
-      select: null,
     }),
+    computed: mapGetters(['loggedIn', 'authenticationError']),
 
     methods: {
       validate () {
@@ -67,6 +77,7 @@
       },
       reset () {
         this.$refs.form.reset()
+        this.$store.dispatch('clearErrorMessage')
       },
       login () {
         if (this.validate) {

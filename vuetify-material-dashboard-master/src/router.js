@@ -15,7 +15,7 @@ const router = new Router({
       children: [
         // Dashboard
         {
-          name: 'Dashboard',
+          name: 'WELCOME!!!!',
           path: '',
           component: () => import('@/views/dashboard/Dashboard'),
         },

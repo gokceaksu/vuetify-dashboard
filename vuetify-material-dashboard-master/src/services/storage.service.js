@@ -1,5 +1,6 @@
 const TOKEN_KEY = 'access_token'
 const REFRESH_TOKEN_KEY = 'refresh_token'
+const SESSION_KEY = 'session'
 
 /**
  * Manage the how Access Tokens are being stored and retreived from storage.
@@ -34,4 +35,18 @@ const TokenService = {
 
 }
 
-export { TokenService }
+const SessionService = {
+    getSession () {
+        return localStorage.getItem(SESSION_KEY)
+    },
+
+    saveSession (session) {
+        localStorage.setItem(SESSION_KEY, JSON.stringify(session))
+    },
+
+    removeSession () {
+        localStorage.removeItem(SESSION_KEY)
+    },
+
+}
+export { TokenService, SessionService }

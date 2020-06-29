@@ -1,15 +1,14 @@
 import ApiService from './api.service'
-import { TokenService } from './storage.service'
+import { TokenService, SessionService } from './storage.service'
 
 export default {
   async login (credentials) {
     const requestBody = {
-      userid: credentials.userid,
+      userId: credentials.userid,
       password: credentials.password,
-      language: 'tr',
+      // language: 'tr',
     }
-    const response = await ApiService.post('login', requestBody)
-    // TokenService.saveToken(response.data.token)
+    const response = await ApiService.post('simpleLogin', requestBody)
     return response.data
   },
 
@@ -17,5 +16,6 @@ export default {
     TokenService.removeToken()
     TokenService.removeRefreshToken()
     ApiService.removeHeader()
+    SessionService.removeSession()
   },
 }

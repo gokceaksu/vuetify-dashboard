@@ -118,7 +118,7 @@
         },
         {
           icon: 'mdi-calendar',
-          title: 'Takvim',
+          title: 'Calendar',
           to: '/index/pages/calendar',
         },
         /*
