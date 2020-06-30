@@ -25,6 +25,7 @@ import ApiService from './services/api.service'
 import { TokenService } from './services/storage.service'
 
 Vue.config.productionTip = false
+Vue.config.devtools = true
 
 ApiService.init(process.env.VUE_APP_ROOT_API)
 

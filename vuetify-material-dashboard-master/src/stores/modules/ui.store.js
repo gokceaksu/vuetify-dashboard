@@ -5,8 +5,6 @@ export default {
       barImage: 'https://demos.creative-tim.com/material-dashboard/assets/img/sidebar-1.jpg',
       drawer: null,
     },
-    getters: {
-    },
     mutations: {
       SET_BAR_IMAGE (state, payload) {
         state.barImage = payload

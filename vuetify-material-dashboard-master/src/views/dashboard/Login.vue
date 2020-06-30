@@ -46,7 +46,7 @@
       </v-card-text>
     </v-card>
     <v-alert
-      v-if="authenticationError.length > 0"
+      :value="authenticationError.length > 0"
       type="error"
       dense
       outlined

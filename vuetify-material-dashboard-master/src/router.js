@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import { TokenService } from './services/token.service'
 
 Vue.use(Router)
 
@@ -15,25 +14,25 @@ const router = new Router({
       children: [
         // Dashboard
         {
-          name: 'WELCOME!!!!',
+          name: 'Index',
           path: '',
           component: () => import('@/views/dashboard/Dashboard'),
         },
         // Pages
         {
-          name: 'Kullanıcılar',
-          path: 'pages/user',
-          // component: () => import('@/views/dashboard/pages/UserProfile'),
+          name: 'User',
+          path: 'user',
           component: () => import('@/views/dashboard/pages/User'),
         },
         {
-          name: 'Takvim',
-          path: 'pages/calendar',
+          name: 'Calendar',
+          path: 'calendar',
           component: () => import('@/views/dashboard/pages/Calendar'),
         },
+        /*
         {
           name: 'Notifications',
-          path: 'components/notifications',
+          path: 'notifications',
           component: () => import('@/views/dashboard/component/Notifications'),
         },
         {
@@ -63,31 +62,42 @@ const router = new Router({
           name: 'Upgrade',
           path: 'upgrade',
           component: () => import('@/views/dashboard/Upgrade'),
-        },
+        }, */
       ],
+      meta: {
+        user: true,
+      },
     },
     {
-      path: '/',
+      name: 'Login',
+      path: '/login',
       component: () => import('@/views/dashboard/Login'),
+      meta: {
+        guest: true,
+      },
     },
   ],
 })
-/*
-router.beforeEach((to, from, next) => {
-  var loggedIn = !!TokenService.getToken()
 
-  if (!loggedIn) {
-    return next({
-      path: '/login',
-      query: { redirect: to.fullPath },
-      // Store the full path to redirect the user to after login
-    })
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.user)) {
+      if (localStorage.getItem('access_token') == null) {
+          next({
+              path: '/login',
+              params: { nextUrl: to.fullPath },
+          })
+      } else {
+        next()
+      }
+  } else if (to.matched.some(record => record.meta.guest)) {
+      if (localStorage.getItem('access_token') == null) {
+          next()
+      } else {
+          next({ name: 'Index' })
+      }
+  } else {
+      next()
   }
-  // Do not allow user to visit login page if they are logged in
-  if (loggedIn) {
-    return next('/')
-  }
-  next()
 })
-*/
+
 export default router

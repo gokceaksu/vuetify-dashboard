@@ -1,5 +1,5 @@
 import ApiService from './api.service'
-import { TokenService, SessionService } from './storage.service'
+// import { TokenService, SessionService } from './storage.service'
 
 export default {
   async login (credentials) {
@@ -12,10 +12,7 @@ export default {
     return response.data
   },
 
-  logout () {
-    TokenService.removeToken()
-    TokenService.removeRefreshToken()
-    ApiService.removeHeader()
-    SessionService.removeSession()
+  async logout () {
+    return await ApiService.post('logout', null)
   },
 }

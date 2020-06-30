@@ -1,5 +1,5 @@
 import axios from 'axios'
-// import { TokenService } from '../services/storage.service'
+import { TokenService } from '../services/storage.service'
 
 export default {
 
@@ -12,12 +12,15 @@ export default {
     },
 
     removeHeader () {
-        axios.defaults.headers.common = {}
+        // axios.defaults.headers.common = {}
     },
 
     post (cmd, requestBody) {
       const params = new URLSearchParams()
       params.append('cmd', cmd)
+      if (TokenService.getToken() != null) {
+        params.append('token', TokenService.getToken())
+      }
       if (requestBody) {
         params.append('jp', JSON.stringify(requestBody))
       }

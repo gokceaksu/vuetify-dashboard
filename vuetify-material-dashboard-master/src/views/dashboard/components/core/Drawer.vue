@@ -114,12 +114,12 @@
         {
           icon: 'mdi-account',
           title: 'user',
-          to: '/index/pages/user',
+          to: '/index/user',
         },
         {
           icon: 'mdi-calendar',
           title: 'Calendar',
-          to: '/index/pages/calendar',
+          to: '/index/calendar',
         },
         /*
         {

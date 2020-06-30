@@ -28,6 +28,7 @@ export default {
         state.authenticationError = errorMessage
       },
     },
+
     actions: {
       async login (context, credentials) {
         const res = await UserService.login(credentials)
@@ -42,6 +43,21 @@ export default {
             TokenService.saveToken(res.data.authorizationData.session.token)
             SessionService.saveSession(res.data.authorizationData.session)
             resolve(res)
+          }
+        })
+      },
+
+      async logout (context) {
+        const res = await UserService.logout()
+        return new Promise((resolve, reject) => {
+          // logout success
+          if (res) {
+            context.commit('setAuth', false)
+            TokenService.removeToken()
+            SessionService.removeSession()
+            resolve(res)
+          } else {
+            reject(res)
           }
         })
       },

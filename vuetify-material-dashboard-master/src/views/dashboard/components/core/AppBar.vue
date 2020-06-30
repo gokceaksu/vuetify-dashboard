@@ -57,7 +57,7 @@
       class="ml-2"
       min-width="0"
       text
-      to="/"
+      to="/index"
     >
       <v-icon>mdi-view-dashboard</v-icon>
     </v-btn>
@@ -110,9 +110,9 @@
       class="ml-2"
       min-width="0"
       text
-      to="/pages/user"
+      @click="logout"
     >
-      <v-icon>mdi-account</v-icon>
+      <v-icon>mdi-logout</v-icon>
     </v-btn>
   </v-app-bar>
 </template>
@@ -178,6 +178,12 @@
       ...mapMutations({
         setDrawer: 'SET_DRAWER',
       }),
+
+      logout () {
+        this.$store.dispatch('logout').then(response => {
+          this.$router.push('/login')
+        })
+      },
     },
   }
 </script>
